@@ -46,6 +46,35 @@ class Firebase {
         });
         return logout;
     }
+
+    async getUserState(){
+        return new Promise(resolve => {
+            this.auth.onAuthStateChanged(resolve);
+        });
+    }
+
+    async createPost(post){
+        const storageRef = firebase.storage().ref();
+        const storageChild = storageRef.child(post.cover.name);
+        const postCover = await storageChild.put(post.cover);
+        const downLoadURL = await storageChild.getDownloadURL();
+        const fileRef = postCover.ref.location.path;
+
+        let newPost = {
+            title: post.title,
+            content: post.content,
+            cover: downLoadURL,
+            fileref: fileRef
+        }
+
+        const firestorePost = await firebase.firestore().collection("Posts").add(newPost).catch(err => {
+            console.log(err);
+            return err;
+            
+        });
+        return firestorePost;
+        
+    }
 }
 
 export default new Firebase();
