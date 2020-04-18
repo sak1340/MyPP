@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import firebase from '../firebase/config';
 
 const Create = (props) => {
@@ -29,6 +29,11 @@ const Create = (props) => {
         })
     }
 
+    const redirect = routeRedirect;
+    if (redirect) {
+        return <Redirect to="/" />
+    }
+
     let createForm;
     if (isBusy) {
         createForm = (
@@ -46,10 +51,10 @@ const Create = (props) => {
                 <input type="text" name="title" onChange={(e) => setTitle(e.target.value)} />
 
                 <label htmlFor="content">POST CONTENT</label>
-                <textarea  name="content" onChange={(e) => setContent(e.target.value)} ></textarea>
+                <textarea name="content" onChange={(e) => setContent(e.target.value)} ></textarea>
 
                 <label htmlFor="cover" className="cover">COVER</label>
-                <input type="file" onChange={(e) => setCover(e.target.value)} />
+                <input type="file" onChange={(e) => setCover(e.target.files)} />
 
                 <input type="submit" value="create post" />
             </form>

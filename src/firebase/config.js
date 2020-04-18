@@ -1,7 +1,7 @@
-import firebase from 'firebase/app';
-import 'firebase/auth';
-import 'firebase/firestore';
-import 'firebase/storage';
+import firebase, { storage } from 'firebase/app'
+import 'firebase/auth'
+import 'firebase/firestore'
+import 'firebase/storage'
 
 
 const config = {
@@ -17,48 +17,63 @@ const config = {
 
 
 class Firebase {
-    constructor(){
+    constructor() {
         firebase.initializeApp(config)
-        this.auth = firebase.auth();
-        this.db = firebase.firestore();
+        this.auth = firebase.auth()
+        this.db = firebase.firestore()
     }
 
-    async login(email, password){
+    async login(email, password) {
         const user = await firebase.auth().signInWithEmailAndPassword(email, password).catch(err => {
-            console.log(err);
-            return err;
+            console.log(err)
+            return err
         });
-        return user;
+        return user
     }
 
-    async signup(email, password){
+    async signup(email, password) {
         const user = await firebase.auth().createUserWithEmailAndPassword(email, password).catch(err => {
-            console.log(err);
-            return err;
-        });
-        return user;
+            console.log(err)
+            return err
+        })
+        return user
     }
 
-    async logout(){
+    async logout() {
         const logout = await firebase.auth().signOut().catch(err => {
-            console.log(err);
-            return err;
-        });
-        return logout;
+            console.log(err)
+            return err
+        })
+        return logout
     }
 
-    async getUserState(){
+    async getUserState() {
         return new Promise(resolve => {
             this.auth.onAuthStateChanged(resolve);
-        });
+        })
     }
 
-    async createPost(post){
-        const storageRef = firebase.storage().ref();
-        const storageChild = storageRef.child(post.cover.name);
-        const postCover = await storageChild.put(post.cover);
-        const downLoadURL = await storageChild.getDownloadURL();
-        const fileRef = postCover.ref.location.path;
+    async getPosts() {
+        let postsArray = [];
+        const posts = await firebase.firestore().collection("Posts").get();
+        posts.forEach(doc => {
+            postsArray.push({ id: doc.id, data: doc.data() })
+        })
+        return postsArray
+    }
+
+    async getPost(postid) {
+        const post = await firebase.firestore().collection("Posts").doc(postid).get()
+        const postData = post.data()
+        return postData
+    }
+
+    async createPost(post) {
+        const storageRef = firebase.storage().ref()
+        const storageChild = storageRef.child(post.cover.name)
+        const postCover = await storageChild.put(post.cover)
+        const downLoadURL = await storageChild.getDownloadURL()
+        const fileRef = postCover.ref.location.path
 
         let newPost = {
             title: post.title,
@@ -68,13 +83,30 @@ class Firebase {
         }
 
         const firestorePost = await firebase.firestore().collection("Posts").add(newPost).catch(err => {
+            console.log(err)
+            return err
+
+        })
+        return firestorePost
+
+    }
+    updatePost(postid, postData) {
+        console.log(postid, postData);
+
+    }
+
+    async deletePost(postid, fileref) {
+        const storageRef = firebase.storage().ref()
+        await storageRef.child(fileref).delete().catch(err => {
             console.log(err);
-            return err;
-            
-        });
-        return firestorePost;
-        
+        })
+        console.log("Image");
+        const post = await firebase.firestore().collection("Posts").doc(postid).delete().catch(err => {
+            console.log(err);
+        })
+        console.log("Delete");
+        return post
     }
 }
 
-export default new Firebase();
+export default new Firebase()

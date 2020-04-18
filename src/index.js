@@ -5,12 +5,15 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import { AuthProvider } from './context/AuthContext';
 import { BrowserRouter } from 'react-router-dom'
+import { PostsProvider } from './context/postsContext'
 
 
 ReactDOM.render(
   <BrowserRouter>
     <AuthProvider>
-      <App />
+      <PostsProvider>
+        <App />
+      </PostsProvider>
     </AuthProvider>
   </BrowserRouter>,
   document.getElementById('root')
