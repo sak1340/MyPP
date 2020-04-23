@@ -132,5 +132,4 @@ class Firebase {
         return post
     }
 }
-
 export default new Firebase()
