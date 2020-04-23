@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link, withRouter, Redirect } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import firebase from '../firebase/config';
 import { Auth } from '../context/AuthContext';
 
@@ -31,8 +31,6 @@ const Nav = (props) => {
 
     let buttons;
     if (userState != null || state.user.hasOwnProperty("user")) {
-        //console.log(state);
-        
         buttons = (<React.Fragment>
             <li>{userEmail}</li>
             <li><button className="logout" onClick={logout}>LogOut</button></li>

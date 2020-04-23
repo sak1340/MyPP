@@ -8,7 +8,6 @@ const Post = (props) => {
     const [userState, setUserState] = useState(false)
     const [isBusy, setIsBusy] = useState(false)
     const [post, setPost] = useState("")
-    const [loading, setLoading] = useState("")
 
     const titleRef = useRef(null)
     const contentRef = useRef(null)
@@ -49,12 +48,22 @@ const Post = (props) => {
     const update = (e) => {
         e.preventDefault()
         setIsBusy(true)
+        const _post = {
+            title: titleRef.current.value,
+            content: contentRef.current.value
+        }
+        if (fileRef.current.files.length > 0) {
+            _post["cover"] = fileRef.current.files[0]
+            _post["oldcover"] = post.fileref
+        }
+        firebase.updatePost(postid, _post).then(() => {
+            console.log("UPDATE");
+            setIsBusy(false)
+            setRedirect(true)
+        }).catch(err => {
+            console.log(err);
+        })
 
-        //Create Object
-        //Update
-
-        setIsBusy(false)
-        setRedirect(true)
     }
 
     const toggleEditMode = () => {
@@ -120,8 +129,12 @@ const Post = (props) => {
                 <img src={post.cover} alt="post cover" />
                 <h2>{post.title}</h2>
                 <div>{post.content}</div>
-                {editButton}
-                {updateForm}
+                {post.email === localStorage.getItem("email")
+                ?(
+                <div>{editButton},{updateForm}</div>
+                )
+                :(<div></div>)}
+                
             </div>
         )
     }

@@ -1,4 +1,4 @@
-import firebase, { storage } from 'firebase/app'
+import firebase from 'firebase/app'
 import 'firebase/auth'
 import 'firebase/firestore'
 import 'firebase/storage'
@@ -22,9 +22,12 @@ class Firebase {
         this.auth = firebase.auth()
         this.db = firebase.firestore()
     }
-
+    
     async login(email, password) {
-        const user = await firebase.auth().signInWithEmailAndPassword(email, password).catch(err => {
+        const user = await firebase.auth().signInWithEmailAndPassword(email, password).then((e) => {
+            localStorage.setItem("email",email)
+            return e
+        }).catch(err => {
             console.log(err)
             return err
         });
@@ -79,22 +82,43 @@ class Firebase {
             title: post.title,
             content: post.content,
             cover: downLoadURL,
-            fileref: fileRef
+            fileref: fileRef,
+            email : localStorage.getItem("email")
         }
-
         const firestorePost = await firebase.firestore().collection("Posts").add(newPost).catch(err => {
             console.log(err)
             return err
-
         })
         return firestorePost
-
     }
-    updatePost(postid, postData) {
-        console.log(postid, postData);
+    async updatePost(postid, postData) {
+        if (postData["cover"]) {
+            const storageRef = firebase.storage().ref()
+            const storageChild = storageRef.child(postData.cover.name)
+            const postCover = await storageChild.put(postData.cover)
+            const downLoadURL = await storageChild.getDownloadURL()
+            const fileRef = postCover.ref.location.path
 
+            await storageRef.child(postData["oldcover"]).delete().catch(err => {
+                console.log(err);
+            })
+            let updatedPost = {
+                title: postData.title,
+                content: postData.content,
+                cover: downLoadURL,
+                fileref: fileRef
+            }
+            const post = await firebase.firestore().collection("Posts").doc(postid).set(updatedPost, { merge: true }).catch(err => {
+                console.log(err);
+            })
+            return post
+        } else {
+            const post = await firebase.firestore().collection("Posts").doc(postid).set(postData, { merge: true }).catch(err => {
+                console.log(err);
+            })
+            return post
+        }
     }
-
     async deletePost(postid, fileref) {
         const storageRef = firebase.storage().ref()
         await storageRef.child(fileref).delete().catch(err => {

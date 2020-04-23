@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Redirect } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Redirect, withRouter } from 'react-router-dom';
 import firebase from '../firebase/config';
 
 const Create = (props) => {
@@ -17,7 +17,8 @@ const Create = (props) => {
         let post = {
             title,
             content,
-            cover: cover[0]
+            cover: cover[0],
+            email: ""
         }
         await firebase.createPost(post).then(() => {
             console.log("post create success");
@@ -28,11 +29,19 @@ const Create = (props) => {
             setIsBusy(false);
         })
     }
+    useEffect(() => {
+        firebase.getUserState().then(user => {
+            if(!user){
+                props.history.replace("/login")
+            }
+        })
+    })
 
     const redirect = routeRedirect;
     if (redirect) {
         return <Redirect to="/" />
     }
+
 
     let createForm;
     if (isBusy) {
@@ -67,4 +76,4 @@ const Create = (props) => {
     )
 }
 
-export default Create;
+export default withRouter(Create);
