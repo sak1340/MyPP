@@ -2,12 +2,15 @@ import React, { useState, useEffect, useRef } from 'react'
 import { Redirect } from 'react-router-dom'
 import firebase from '../firebase/config'
 
+
+
 const Post = (props) => {
     const [timer, setTimer] = useState(false)
     const [editMode, setEditMode] = useState(false)
     const [userState, setUserState] = useState(false)
     const [isBusy, setIsBusy] = useState(false)
     const [post, setPost] = useState("")
+    const [loading, setLoading] = useState("");
 
     const titleRef = useRef(null)
     const contentRef = useRef(null)
@@ -85,8 +88,8 @@ const Post = (props) => {
 
         if (isBusy) {
             updateForm = (
-                <div className="precessing">
-                    <p>ReQuest is ProCessing </p>
+                <div className="processing">
+                    <p>Request is being processed <span className="process">{loading}</span></p>
                     <div className="loader">Loading...</div>
                 </div>
             )
@@ -115,10 +118,10 @@ const Post = (props) => {
     }
     if (timer) {
         currentPosts = (
-            <div className="precessing">
-                <p>ReQuest is ProCessing </p>
-                <div className="loader">Loading...</div>
-            </div>
+            <div className="processing">
+                    <p>Request is being processed <span className="process">{loading}</span></p>
+                    <div className="loader">Loading...</div>
+                </div>
         )
     } else {
         if (userState) {

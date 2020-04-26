@@ -1,14 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { Redirect, withRouter } from 'react-router-dom';
 import firebase from '../firebase/config';
+import { Spinner } from 'reactstrap'
 
 const Create = (props) => {
 
-    const [title, setTitle] = useState("");
-    const [content, setContent] = useState("");
-    const [cover, setCover] = useState("");
-    const [isBusy, setIsBusy] = useState(false);
-    const [routeRedirect, setRedirect] = useState(false);
+    const [title, setTitle] = useState("")
+    const [content, setContent] = useState("")
+    const [cover, setCover] = useState("")
+    const [isBusy, setIsBusy] = useState(false)
+    const [routeRedirect, setRedirect] = useState(false)
 
     const addPost = async (e) => {
         e.preventDefault();
@@ -31,7 +32,7 @@ const Create = (props) => {
     }
     useEffect(() => {
         firebase.getUserState().then(user => {
-            if(!user){
+            if (!user) {
                 props.history.replace("/login")
             }
         })
@@ -47,8 +48,7 @@ const Create = (props) => {
     if (isBusy) {
         createForm = (
             <div className="precessing">
-                <p>ReQuest is ProCessing </p>
-                <div className="loader">Loading...</div>
+                <Spinner color="warning" />
             </div>
         )
     } else {

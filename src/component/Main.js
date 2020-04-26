@@ -1,12 +1,12 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import firebase from '../firebase/config'
 import { Posts } from '../context/postsContext'
 
 const Main = () => {
 
-    const {state, dispatch} = React.useContext(Posts)
-    const getPosts = async() => {
+    const { state, dispatch } = React.useContext(Posts)
+    const getPosts = async () => {
         const postsArray = await firebase.getPosts().catch(err => {
             console.log(err);
             return err
@@ -18,24 +18,26 @@ const Main = () => {
         })
     }
 
-    useEffect(() =>{
+    useEffect(() => {
         getPosts()
     }, [])
+
+    
 
 
     return (
         <React.Fragment>
             <header>
                 <div>
-                    <h1>React</h1>
+                    <h1>WELCOME TO PHIPHIGUIDE</h1>
                 </div>
             </header>
             <div className="posts">
                 {state.posts.map(post => {
                     return (
                         <div className="post" key={post.id}>
-                            <Link to={"post/"+ post.id}>
-                                <div style={{backgroundImage: "url(" + post.data.cover + ")" }} />
+                            <Link to={"post/" + post.id}>
+                                <div style={{ backgroundImage: "url(" + post.data.cover + ")" }} />
                             </Link>
                         </div>
                     )
