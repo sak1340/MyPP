@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import firebase from '../firebase/config'
 import { Posts } from '../context/postsContext'
+import {Input}from 'reactstrap';
 
 const Main = () => {
 
@@ -28,11 +29,14 @@ const Main = () => {
     return (
         <React.Fragment>
             <header>
-                <div>
+                <div >
                     <h1>WELCOME TO PHIPHIGUIDE</h1>
                 </div>
             </header>
-            <div className="posts">
+            <div className="search">
+            <Input className="formSearch" type="text" placeholder="Search"></Input>
+           </div> 
+           <div className="posts">
                 {state.posts.map(post => {
                     return (
                         <div className="post" key={post.id}>

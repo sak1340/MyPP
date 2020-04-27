@@ -134,7 +134,7 @@ const Post = (props) => {
                 <div>{post.content}</div>
                 {post.email === localStorage.getItem("email")
                 ?(
-                <div>{editButton},{updateForm}</div>
+                <div>{editButton}{updateForm}</div>
                 )
                 :(<div></div>)}
                 

@@ -48,7 +48,7 @@ const Nav = (props) => {
   return (
     <nav>
       <ul>
-        <li><Link to="/">HOME</Link></li>
+        <li ><Link to="/">HOME</Link></li>
       </ul>
       <ul>
         {buttons}
