@@ -90,6 +90,7 @@ nav ul:first-of-type li:first-of-type{
   width: 350px;
   min-width: 300px;
   position: relative;
+  margin-left: 15px;
   
 }
 
@@ -179,6 +180,13 @@ form * {
   width: 40%;
   margin: 120px auto;
   text-align: center;
+}
+.buttond{
+  border-radius: 10px;
+  border: rgb(0, 2, 3);
+  background-color: slategrey;
+  margin-top: 15px;
+  align-items: center;
 }
 
  .loader,

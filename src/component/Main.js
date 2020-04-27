@@ -23,18 +23,17 @@ const Main = () => {
         getPosts()
     }, [])
 
-    
 
 
     return (
         <React.Fragment>
             <header>
                 <div >
-                    <h1>WELCOME TO PHIPHIGUIDE</h1>
+                    <h1>WELCOME TO PHIPHI GUIDE</h1>
                 </div>
             </header>
             <div className="search">
-            <Input className="formSearch" type="text" placeholder="Search"></Input>
+            <Input className="formSearch" type="text" placeholder="Search"/>
            </div> 
            <div className="posts">
                 {state.posts.map(post => {

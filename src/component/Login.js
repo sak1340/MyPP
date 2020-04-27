@@ -37,7 +37,7 @@ const Login = () => {
                 <input type="email" name="email" onChange={(e) => setEmail(e.target.value)} />
                 <label htmlFor="email">PASSWORD</label>
                 <input type="password" name="password" onChange={(e) => setPassword(e.target.value)} />
-                <input type="submit" value="LOGIN" />
+                <input className="buttond" type="submit" value="LOGIN" />
             </form>
         </React.Fragment>
     )

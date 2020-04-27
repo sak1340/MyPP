@@ -10,6 +10,7 @@ const Create = (props) => {
     const [cover, setCover] = useState("")
     const [isBusy, setIsBusy] = useState(false)
     const [routeRedirect, setRedirect] = useState(false)
+    const [loading, setLoading] = useState("");
 
     const addPost = async (e) => {
         e.preventDefault();
@@ -47,8 +48,9 @@ const Create = (props) => {
     let createForm;
     if (isBusy) {
         createForm = (
-            <div className="precessing">
-                <Spinner color="warning" />
+            <div className="processing">
+                <p>Request is being processed <span className="process">{loading}</span></p>
+                <div className="loader">Loading...</div>
             </div>
         )
     } else {
@@ -65,7 +67,7 @@ const Create = (props) => {
                 <label htmlFor="cover" className="cover">COVER</label>
                 <input type="file" onChange={(e) => setCover(e.target.files)} />
 
-                <input type="submit" value="create post" />
+                <input className="buttond" type="submit" value="create post" />
             </form>
         )
     }

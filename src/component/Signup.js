@@ -42,7 +42,7 @@ const Signup = () => {
                 <input type="email" name="email" onChange={(e) => setEmail(e.target.value)} />
                 <label htmlFor="email">PASSWORD</label>
                 <input type="password" name="password" onChange={(e) => setPassword(e.target.value)} />
-                <input type="submit" value="Create account" />
+                <input className="buttond" type="submit" value="Create account" />
             </form>
         </React.Fragment>
     )
