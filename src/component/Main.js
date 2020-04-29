@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import firebase from '../firebase/config'
 import { Posts } from '../context/postsContext'
@@ -21,9 +21,7 @@ const Main = () => {
     useEffect(() => {
         getPosts()
     }, [])
-
-
-
+    
     return (
         <React.Fragment>
             <header>

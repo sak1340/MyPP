@@ -33,7 +33,7 @@ const Login = () => {
     return (
         <React.Fragment>
             <form onSubmit={login}>
-                <p className="search">LOGIN</p>
+                <p>LOGIN</p>
                 <label htmlFor="email">EMAIL</label>
                 <input type="email" name="email" onChange={(e) => setEmail(e.target.value)} />
                 <label htmlFor="email">PASSWORD</label>

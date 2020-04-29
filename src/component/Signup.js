@@ -37,7 +37,7 @@ const Signup = () => {
     return (
         <React.Fragment>
             <form onSubmit={signup}>
-                <p className="search">New Account</p>
+                <p>New Account</p>
                 <label htmlFor="email">EMAIL</label>
                 <input type="email" name="email" onChange={(e) => setEmail(e.target.value)} />
                 <label htmlFor="email">PASSWORD</label>

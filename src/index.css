@@ -74,9 +74,6 @@ nav ul:first-of-type li:first-of-type{
   width: 15%; 
   font-size: 18px;
 }
-.search{
-  text-align: center;
-}
 .posts {
   padding-top: 30px;
   padding-bottom: 80px ;
@@ -84,6 +81,7 @@ nav ul:first-of-type li:first-of-type{
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
+  margin-bottom: 10px;
 }
 
 .post {

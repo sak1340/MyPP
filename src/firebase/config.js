@@ -124,11 +124,9 @@ class Firebase {
         await storageRef.child(fileref).delete().catch(err => {
             console.log(err);
         })
-        console.log("Image");
         const post = await firebase.firestore().collection("Posts").doc(postid).delete().catch(err => {
             console.log(err);
         })
-        console.log("Delete");
         return post
     }
 }

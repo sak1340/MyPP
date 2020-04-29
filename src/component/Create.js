@@ -30,13 +30,6 @@ const Create = (props) => {
             setIsBusy(false);
         })
     }
-    useEffect(() => {
-        firebase.getUserState().then(user => {
-            if (!user) {
-                props.history.replace("/login")
-            }
-        })
-    })
 
     const redirect = routeRedirect;
     if (redirect) {
@@ -56,7 +49,6 @@ const Create = (props) => {
         createForm = (
             <form onSubmit={addPost}>
                 <p>Create</p>
-
                 <label htmlFor="title">POST TITLE</label>
                 <input type="text" name="title" onChange={(e) => setTitle(e.target.value)} />
 

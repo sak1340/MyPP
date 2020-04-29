@@ -44,10 +44,6 @@ const Post = (props) => {
         return <Redirect to="/" />
     }
 
-    let currentPosts
-    let editButton
-    let deleteButton
-
     const update = (e) => {
         e.preventDefault()
         setIsBusy(true)
@@ -83,6 +79,7 @@ const Post = (props) => {
     }
 
     let updateForm
+    let deleteButton
     if (editMode) {
         deleteButton = <button className="delete" onClick={(e) => deleteCurrentPost()}>Delete</button>
 
@@ -116,6 +113,8 @@ const Post = (props) => {
             )
         }
     }
+    let currentPosts
+    let editButton
     if (timer) {
         currentPosts = (
             <div className="processing">
