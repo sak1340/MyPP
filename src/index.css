@@ -124,7 +124,8 @@ nav ul:first-of-type li:first-of-type{
 }
 
 .single > img {
-  width: 100%;
+  width: 500px;
+  min-width: 450px;
 }
 
 .process {

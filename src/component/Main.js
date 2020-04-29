@@ -2,17 +2,16 @@ import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import firebase from '../firebase/config'
 import { Posts } from '../context/postsContext'
-import {Input}from 'reactstrap';
 
 const Main = () => {
 
     const { state, dispatch } = React.useContext(Posts)
+
     const getPosts = async () => {
         const postsArray = await firebase.getPosts().catch(err => {
             console.log(err);
             return err
         })
-
         return dispatch({
             type: "FETCH_POSTS",
             payload: postsArray
@@ -29,13 +28,10 @@ const Main = () => {
         <React.Fragment>
             <header>
                 <div >
-                    <h1>WELCOME TO PHIPHI GUIDE</h1>
+                    <h1>WELCOME TO PHIPHI REVIEW</h1>
                 </div>
             </header>
-            <div className="search">
-            <Input className="formSearch" type="text" placeholder="Search"/>
-           </div> 
-           <div className="posts">
+            <div className="posts">
                 {state.posts.map(post => {
                     return (
                         <div className="post" key={post.id}>

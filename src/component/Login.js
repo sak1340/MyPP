@@ -3,33 +3,34 @@ import firebase from '../firebase/config'
 import { Auth } from '../context/AuthContext'
 import { Redirect } from 'react-router-dom'
 
+
+
 const Login = () => {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
 
     const [routeRedirect, setRouteRedirect] = useState(false)
-    const {state, dispatch} = React.useContext(Auth)
+    const { state, dispatch } = React.useContext(Auth)
 
-    const login = async(e) => {
+
+    const login = async (e) => {
         e.preventDefault();
-        let response = await firebase.login(email,password)
-        if(response.hasOwnProperty("message")){
+        let response = await firebase.login(email, password)
+        if (response.hasOwnProperty("message")) {
             console.log(response.message);
-        }else{
+        } else {
             setRouteRedirect(true);
             return dispatch({
                 type: "LOGIN",
                 payload: response.user
             })
-            
         }
     }
     const redirect = routeRedirect
-    if(redirect){
+    if (redirect) {
         return <Redirect to="/" />
     }
-
-    return(
+    return (
         <React.Fragment>
             <form onSubmit={login}>
                 <p className="search">LOGIN</p>

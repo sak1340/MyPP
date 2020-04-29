@@ -40,6 +40,7 @@ const Nav = (props) => {
   } else {
     buttons = (
       <React.Fragment>
+        <li><p>Guest</p></li>
         <li><Link to="/signup">Signup</Link></li>
         <li><Link to="/login">LogIn</Link></li>
       </React.Fragment>

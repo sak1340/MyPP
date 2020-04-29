@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Redirect, withRouter } from 'react-router-dom';
 import firebase from '../firebase/config';
-import { Spinner } from 'reactstrap'
 
 const Create = (props) => {
 

@@ -108,7 +108,7 @@ const Post = (props) => {
                         <label htmlFor="cover" className="cover">Cover</label>
                         <input type="file" ref={fileRef} />
 
-                        <input type="submit" value="update post" />
+                        <input className="buttond" type="submit" value="update post" />
                     </form>
 
                     {deleteButton}
@@ -119,9 +119,9 @@ const Post = (props) => {
     if (timer) {
         currentPosts = (
             <div className="processing">
-                    <p>Request is being processed <span className="process">{loading}</span></p>
-                    <div className="loader">Loading...</div>
-                </div>
+                <p>Request is being processed <span className="process">{loading}</span></p>
+                <div className="loader">Loading...</div>
+            </div>
         )
     } else {
         if (userState) {
@@ -133,14 +133,15 @@ const Post = (props) => {
                 <h2>{post.title}</h2>
                 <div>{post.content}</div>
                 {post.email === localStorage.getItem("email")
-                ?(
-                <div>{editButton}{updateForm}</div>
-                )
-                :(<div></div>)}
-                
+                    ? (
+                        <div>{editButton}{updateForm}</div>
+                    )
+                    : (<div></div>)}
+
             </div>
         )
     }
+    
 
     return (
         <React.Fragment>
