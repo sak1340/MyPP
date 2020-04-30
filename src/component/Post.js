@@ -131,6 +131,7 @@ const Post = (props) => {
                 <img src={post.cover} alt="post cover" />
                 <h2>{post.title}</h2>
                 <div>{post.content}</div>
+                <div><span>By : {post.email}</span></div>
                 {post.email === localStorage.getItem("email")
                     ? (
                         <div>{editButton}{updateForm}</div>
@@ -140,7 +141,7 @@ const Post = (props) => {
             </div>
         )
     }
-    
+
 
     return (
         <React.Fragment>
