@@ -68,12 +68,6 @@ nav ul:first-of-type li:first-of-type{
   font-weight: bold;
   font-size: 2rem;
 }
-.formSearch{
-  margin-top: 10px;
-  text-align: center;
-  width: 15%; 
-  font-size: 18px;
-}
 .posts {
   padding-top: 30px;
   padding-bottom: 80px ;
@@ -89,7 +83,7 @@ nav ul:first-of-type li:first-of-type{
   min-width: 300px;
   position: relative;
   margin-left: 15px;
-  
+  align-items: center;
 }
 
 
@@ -122,6 +116,7 @@ nav ul:first-of-type li:first-of-type{
 }
 
 .single > img {
+  margin-top: 20px;
   width: 500px;
   min-width: 450px;
 }
